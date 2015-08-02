@@ -1,22 +1,29 @@
-package com.vijayganduri.nutricheck;
+package com.vijayganduri.nutricheck.ui.activity;
 
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+
+import com.vijayganduri.nutricheck.model.Food;
+import com.vijayganduri.nutricheck.rest.RestHandler;
+import com.vijayganduri.nutricheck.ui.fragment.NavigationDrawerFragment;
+import com.vijayganduri.nutricheck.R;
+
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -31,6 +38,8 @@ public class HomeActivity extends AppCompatActivity
      */
     private CharSequence mTitle;
 
+    private static final String TAG = HomeActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +53,21 @@ public class HomeActivity extends AppCompatActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        RestHandler.getInstance().getFoodByQuery("beef", new Callback<List<Food>>() {
+            @Override
+            public void success(List<Food> foods, Response response) {
+                Log.d(TAG,"response : "+response);
+                for(Food food:foods){
+                    Log.d(TAG,""+food);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e(TAG,"Error :"+error);
+            }
+        });
     }
 
     @Override
