@@ -1,9 +1,11 @@
 package com.vijayganduri.nutricheck.model;
 
+import java.io.Serializable;
+
 /**
  * Created by vganduri on 8/2/2015.
  */
-public class Portion {
+public class Portion  implements Serializable {
 
     private String name;
     private Nutrients nutrients;

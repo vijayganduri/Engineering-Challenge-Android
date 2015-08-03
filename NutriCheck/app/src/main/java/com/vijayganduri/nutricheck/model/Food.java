@@ -1,13 +1,16 @@
 package com.vijayganduri.nutricheck.model;
 
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by vganduri on 8/2/2015.
  */
-public class Food {
+public class Food implements Serializable{
 
     private String _id;
     private String name;

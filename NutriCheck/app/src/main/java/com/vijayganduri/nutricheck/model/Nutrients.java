@@ -1,9 +1,11 @@
 package com.vijayganduri.nutricheck.model;
 
+import java.io.Serializable;
+
 /**
  * Created by vganduri on 8/2/2015.
  */
-public class Nutrients {
+public class Nutrients  implements Serializable {
 
     private Important important;
 

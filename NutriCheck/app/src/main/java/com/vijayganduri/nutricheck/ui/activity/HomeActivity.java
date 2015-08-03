@@ -1,29 +1,21 @@
 package com.vijayganduri.nutricheck.ui.activity;
 
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.ActionBar;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
 
-import com.vijayganduri.nutricheck.model.Food;
-import com.vijayganduri.nutricheck.rest.RestHandler;
-import com.vijayganduri.nutricheck.ui.fragment.NavigationDrawerFragment;
 import com.vijayganduri.nutricheck.R;
-
-import java.util.List;
-
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.vijayganduri.nutricheck.ui.fragment.BlogFragment;
+import com.vijayganduri.nutricheck.ui.fragment.CaloriesCounterFragment;
+import com.vijayganduri.nutricheck.ui.fragment.LicenseFragment;
+import com.vijayganduri.nutricheck.ui.fragment.NavigationDrawerFragment;
+import com.vijayganduri.nutricheck.ui.fragment.NutritionFragment;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -37,6 +29,7 @@ public class HomeActivity extends AppCompatActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    private int selPosition;
 
     private static final String TAG = HomeActivity.class.getSimpleName();
 
@@ -53,29 +46,30 @@ public class HomeActivity extends AppCompatActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
-        RestHandler.getInstance().getFoodByQuery("beef", new Callback<List<Food>>() {
-            @Override
-            public void success(List<Food> foods, Response response) {
-                Log.d(TAG,"response : "+response);
-                for(Food food:foods){
-                    Log.d(TAG,""+food);
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Log.e(TAG,"Error :"+error);
-            }
-        });
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+        this.selPosition = position;
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = null;
+        switch (position){
+            case 0:
+                fragment = NutritionFragment.newInstance(position + 1);
+                break;
+            case 1:
+                fragment = CaloriesCounterFragment.newInstance(position + 1);
+                break;
+            case 2:
+                fragment = BlogFragment.newInstance(position + 1);
+                break;
+            case 3:
+                fragment = LicenseFragment.newInstance(position + 1);
+                break;
+        }
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, fragment)
                 .commit();
     }
 
@@ -90,6 +84,9 @@ public class HomeActivity extends AppCompatActivity
             case 3:
                 mTitle = getString(R.string.title_section3);
                 break;
+            case 4:
+                mTitle = getString(R.string.title_section4);
+                break;
         }
     }
 
@@ -98,8 +95,12 @@ public class HomeActivity extends AppCompatActivity
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+        if(selPosition==0){
+            actionBar.setElevation(0);
+        }else{
+            actionBar.setElevation(16);
+        }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -107,7 +108,11 @@ public class HomeActivity extends AppCompatActivity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.home, menu);
+            if(selPosition==0) {
+                getMenuInflater().inflate(R.menu.home, menu);
+            }else{
+                getMenuInflater().inflate(R.menu.global, menu);
+            }
             restoreActionBar();
             return true;
         }
@@ -123,50 +128,16 @@ public class HomeActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            triggerSearchView();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((HomeActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
+    private void triggerSearchView(){
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
     }
 
 }

@@ -2,10 +2,12 @@ package com.vijayganduri.nutricheck.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by vganduri on 8/2/2015.
  */
-public class Important {
+public class Important  implements Serializable {
 
     @SerializedName("dietary_fibre")
     private DietaryFibre dietaryFibre;

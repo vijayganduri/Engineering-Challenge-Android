@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <color name="colorPrimaryDark">#00796B</color><!-- Statusbar -->
-    <color name="colorPrimary">#009688</color> <!-- actionbar -->
-    <color name="colorAccent">#FF4081</color> <!-- widgets, fab-->
+    <color name="colorPrimaryDark">#009bae</color><!-- Statusbar -->
+    <color name="colorPrimary">#00abc0</color> <!-- actionbar -->
+    <color name="colorAccent">#ff5621</color> <!-- widgets, fab-->
+
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#727272</color>
+
+    <color name="headerTextColorPrimary">#FFFFFF</color>
+    <color name="headerTextColorSecondary">#bbFFFFFF</color>
+
+    <color name="tabUnderline">#ff5621</color>
+    <color name="tabText">#88ffffff</color>
+    <color name="tabTextSelected">#ffffff</color>
+
+    <color name="foodDetailDivider">#88cccccc</color>
+
     <color name="colorControlNormal">#cccccc</color>
+
+
+    <color name="appBg">#ffffff</color>
     
 
 </resources>

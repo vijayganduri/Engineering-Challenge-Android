@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">NutriCheck</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">Nutrition</string>
+    <string name="title_section2">Calorie Counter</string>
+    <string name="title_section3">Blog</string>
+    <string name="title_section4">License</string>
+
+    <string name="tabs_title_section1">TRENDING</string>
+    <string name="tabs_title_section2">RECENT</string>
+    <string name="tabs_title_section3">FAVORITE</string>
+    <string name="tabs_title_section4">MY FOOD</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -11,4 +17,25 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
+    <string name="auto_complete_title">Search</string>
+    <string name="auto_complete_hint">Search for food</string>
+    <string name="title_activity_search">SearchActivity</string>
+
+    <string name="nutrition_fat">FAT</string>
+    <string name="nutrition_carbs">CARBS</string>
+    <string name="nutrition_protein">PROTEIN</string>
+    <string name="nutrition_calories">CALORIES</string>
+
+    <string name="nutrition_fibre">Dietary Fibre</string>
+    <string name="nutrition_trans">Trans Fat</string>
+    <string name="nutrition_saturated">Saturated</string>
+    <string name="nutrition_sodium">Sodium</string>
+    <string name="nutrition_potassium">Potassium</string>
+    <string name="nutrition_poly">Poly Unsaturated</string>
+    <string name="nutrition_mono">Mono Unsaturated</string>
+    <string name="nutrition_sugar">Sugar</string>
+    <string name="nutrition_cholesterol">cholesterol</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_food_detail">FoodDetailActivity</string>
 </resources>

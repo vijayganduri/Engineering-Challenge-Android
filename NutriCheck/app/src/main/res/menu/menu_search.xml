@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.vijayganduri.nutricheck.ui.activity.SearchActivity">
+    <item android:id="@+id/action_auto_search" android:title="@string/action_settings"
+        android:icon="@mipmap/ic_action_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always"
+        android:orderInCategory="100"/>
+</menu>
