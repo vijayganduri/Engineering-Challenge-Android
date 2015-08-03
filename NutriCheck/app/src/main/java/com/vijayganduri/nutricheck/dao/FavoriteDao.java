@@ -55,8 +55,8 @@ public class FavoriteDao extends BasicDao{
         }
 
         List<String> ids = new ArrayList<String>();
-        for(String id: ids){
-            ids.add(id);
+        for(Favorite favorite: favResults){
+            ids.add(favorite.getId());
         }
         return getFoodItemsMatchingIds(ids);
     }
