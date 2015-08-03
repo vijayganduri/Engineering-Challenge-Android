@@ -4,11 +4,15 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.vijayganduri.nutricheck.Config;
 import com.vijayganduri.nutricheck.model.Food;
+import com.vijayganduri.nutricheck.model.Portion;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -26,7 +30,7 @@ public class RestHandler {
     public static RestHandler getInstance() {
         return ourInstance;
     }
-
+    Type token = new TypeToken<RealmList<Portion>>(){}.getType();
     Gson gson = new GsonBuilder()
             .setExclusionStrategies(new ExclusionStrategy() {
                 @Override

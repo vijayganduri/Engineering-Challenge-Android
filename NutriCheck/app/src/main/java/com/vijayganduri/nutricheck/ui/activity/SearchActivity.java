@@ -82,7 +82,7 @@ public class SearchActivity extends AppCompatActivity implements FoodListAdapter
             @Override
             public void success(List<Food> items, Response response) {
                 mAdapter.setItems(items);
-               // DBHandler.getInstance(SearchActivity.this).getFoodDao().addOrUpdateRecentItems(items);
+                DBHandler.getInstance(SearchActivity.this).getFoodDao().addOrUpdateRecentItems(items);
             }
 
             @Override
@@ -127,7 +127,7 @@ public class SearchActivity extends AppCompatActivity implements FoodListAdapter
     @Override
     public void onItemClick(int position, Food item) {
         Intent intent = new Intent(this, FoodDetailActivity.class);
-        intent.putExtra(FoodDetailActivity.INTENT_FOOD_INFO, item);
+        intent.putExtra(FoodDetailActivity.INTENT_FOOD_INFO, item.get_id());
         startActivity(intent);
     }
 }

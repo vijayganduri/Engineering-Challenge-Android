@@ -26,7 +26,8 @@ import java.util.Date;
 public class FoodDetailActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private static final String TAG = FoodDetailActivity.class.getSimpleName();
-    public static final String INTENT_FOOD_INFO = "food.info";
+    public static final String INTENT_FOOD_INFO = "food.info.id";
+    private String itemId;
     private Food item;
 
     private TextView title;
@@ -59,12 +60,12 @@ public class FoodDetailActivity extends AppCompatActivity implements AdapterView
         setContentView(R.layout.activity_food_detail);
 
         if(getIntent()!=null && getIntent().getExtras()!=null){
-            item = (Food)getIntent().getExtras().getSerializable(INTENT_FOOD_INFO);
+            itemId = getIntent().getExtras().getString(INTENT_FOOD_INFO, null);
         }
-        if(item==null && savedInstanceState!=null){
-            item = (Food)savedInstanceState.getSerializable(INTENT_FOOD_INFO);
+        if(itemId==null && savedInstanceState!=null){
+            itemId = savedInstanceState.getString(INTENT_FOOD_INFO, null);
         }
-        if(item==null){
+        if(itemId==null){
             Toast.makeText(this, "Could not find any item", Toast.LENGTH_LONG).show();
             finish();
             return;
@@ -91,7 +92,7 @@ public class FoodDetailActivity extends AppCompatActivity implements AdapterView
 
         favButton = (FloatingActionButton)findViewById(R.id.favoriteButton);
 
-        setupInfo(item);
+        setupInfo();
     }
 
     private void setupActionbar(){
@@ -103,7 +104,14 @@ public class FoodDetailActivity extends AppCompatActivity implements AdapterView
         actionbar.setHomeButtonEnabled(true);
     }
 
-    private void setupInfo(Food item){
+    private void setupInfo(){
+
+        item = DBHandler.getInstance(this).getFoodDao().getFoodItemMatchingId(itemId);
+        if(item==null){
+            Toast.makeText(this, "Could not find any item", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
         title.setText(item.getName());
         source.setText(String.format("Source : %s", item.getSource()));
 
@@ -154,8 +162,8 @@ public class FoodDetailActivity extends AppCompatActivity implements AdapterView
             cholesterol.setText(String.format("%.2f %s", important.getCholesterol().getValue(), important.getCholesterol().getUnit()));
         }
 
-        //FavoriteDao favoriteDao = DBHandler.getInstance(this).getFavoriteDao();
-       // syncFavState(favoriteDao.isFoodFavoriteById(item.get_id()));
+        FavoriteDao favoriteDao = DBHandler.getInstance(this).getFavoriteDao();
+        syncFavState(favoriteDao.isFoodFavoriteById(item.get_id()));
     }
 
     private void syncFavState(boolean favorite){
@@ -198,13 +206,13 @@ public class FoodDetailActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.favoriteButton){
- /*           if(!favorite) {
+            if(!favorite) {
                 Favorite favorite = new Favorite(item.get_id(), new Date().getTime());
                 DBHandler.getInstance(this).getFavoriteDao().addOrUpdateFavoriteItem(favorite);
             }else{
                 DBHandler.getInstance(this).getFavoriteDao().removeFavoriteItem(item.get_id());
             }
-            syncFavState(!favorite);*/
+            syncFavState(!favorite);
         }
     }
 }
