@@ -30,21 +30,34 @@ public class RecentDao extends BasicDao{
         printMetricLogs(updated, new Date().getTime()-startTime, items.size());
     }
 
-    //TODO handle duplicate storing here
     public void addOrUpdateRecentItem(Recent item){
+
+        RealmResults<Recent> recentResults = getRecentItemsMatchingQuery(item.getQuery());
+        if(recentResults!=null && recentResults.size()>0){
+            item.setId(recentResults.get(0).getId());
+        }else{
+            item.setId((int) (realm.where(Recent.class).maximumInt("id") + 1));//auto increment
+        }
+
         long startTime = new Date().getTime();
-        item.setId((int) (realm.where(Recent.class).maximumInt("id") + 1));//auto increment
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(item);
         realm.commitTransaction();
         printMetricLogs(updated, new Date().getTime() - startTime, 1);
     }
 
-    public void getAllRecentItems(){
+    public RealmResults<Recent> getAllRecentItems(){
         long startTime = new Date().getTime();
         RealmResults<Recent> results = realm.where(Recent.class).findAllSorted("timestamp",false);
-        Log.d(TAG, "results "+results);
         printMetricLogs(fetched, new Date().getTime() - startTime, results!=null?results.size():0);
+        return results;
+    }
+
+    public RealmResults<Recent> getRecentItemsMatchingQuery(String query){
+        long startTime = new Date().getTime();
+        RealmResults<Recent> results = realm.where(Recent.class).equalTo("query", query).findAll();
+        printMetricLogs(fetched, new Date().getTime() - startTime, results!=null?results.size():0);
+        return results;
     }
 
 }
