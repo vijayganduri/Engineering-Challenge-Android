@@ -4,10 +4,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import io.realm.RealmObject;
+
 /**
  * Created by vganduri on 8/2/2015.
  */
-public class Important  implements Serializable {
+public class Important  extends RealmObject implements Serializable {
 
     @SerializedName("dietary_fibre")
     private DietaryFibre dietaryFibre;
@@ -145,22 +147,4 @@ public class Important  implements Serializable {
         this.monoUnsaturated = monoUnsaturated;
     }
 
-    @Override
-    public String toString() {
-        return "Important{" +
-                "dietaryFibre=" + dietaryFibre +
-                ", transFat=" + transFat +
-                ", saturated=" + saturated +
-                ", totalCarbs=" + totalCarbs +
-                ", sodium=" + sodium +
-                ", potassium=" + potassium +
-                ", polyUnsaturated=" + polyUnsaturated +
-                ", calories=" + calories +
-                ", sugar=" + sugar +
-                ", totalFats=" + totalFats +
-                ", monoUnsaturated=" + monoUnsaturated +
-                ", cholesterol=" + cholesterol +
-                ", protein=" + protein +
-                '}';
-    }
 }

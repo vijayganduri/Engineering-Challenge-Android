@@ -7,18 +7,23 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by vganduri on 8/2/2015.
  */
-public class Food implements Serializable{
+public class Food extends RealmObject implements Serializable{
 
+    @PrimaryKey
     private String _id;
     private String name;
 
     @SerializedName("brand_name")
     private String brandName;
 
-    private List<Portion> portions;
+    private RealmList<Portion> portions;
     private String source;
 
     public String get_id() {
@@ -45,11 +50,11 @@ public class Food implements Serializable{
         this.brandName = brandName;
     }
 
-    public List<Portion> getPortions() {
+    public RealmList<Portion> getPortions() {
         return portions;
     }
 
-    public void setPortions(List<Portion> portions) {
+    public void setPortions(RealmList<Portion> portions) {
         this.portions = portions;
     }
 
@@ -61,14 +66,4 @@ public class Food implements Serializable{
         this.source = source;
     }
 
-    @Override
-    public String toString() {
-        return "Food{" +
-                "_id='" + _id + '\'' +
-                ", name='" + name + '\'' +
-                ", brandName='" + brandName + '\'' +
-                ", portions=" + portions +
-                ", source='" + source + '\'' +
-                '}';
-    }
 }

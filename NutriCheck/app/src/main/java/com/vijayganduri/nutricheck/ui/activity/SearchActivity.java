@@ -16,11 +16,14 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.vijayganduri.nutricheck.R;
+import com.vijayganduri.nutricheck.dao.DBHandler;
 import com.vijayganduri.nutricheck.model.Food;
+import com.vijayganduri.nutricheck.model.Recent;
 import com.vijayganduri.nutricheck.rest.RestHandler;
 import com.vijayganduri.nutricheck.ui.adapter.FoodListAdapter;
 import com.vijayganduri.nutricheck.util.DividerItemDecoration;
 
+import java.util.Date;
 import java.util.List;
 
 import retrofit.Callback;
@@ -74,21 +77,24 @@ public class SearchActivity extends AppCompatActivity implements FoodListAdapter
     }
 
     private void performQuery(String query){
-        Log.w(TAG, "Searched for "+query);
+        Log.w(TAG, "Searched for " + query);
 
         RestHandler.getInstance().getFoodByQuery(query, new Callback<List<Food>>() {
             @Override
             public void success(List<Food> foods, Response response) {
+                Log.w(TAG, "response"+response);
                 mAdapter.setItems(foods);
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Log.e(TAG,"Error :"+error);
+                Log.e(TAG, "Error :" + error);
                 //TODO : add ui unable to load
-                Toast.makeText(SearchActivity.this, "Unable to load "+error, Toast.LENGTH_LONG).show();
+                Toast.makeText(SearchActivity.this, "Unable to load " + error, Toast.LENGTH_LONG).show();
             }
         });
+        Recent recent = new Recent(query, new Date().getTime());
+        DBHandler.getInstance(this).getRecentDao().addOrUpdateRecentItem(recent);
     }
 
     @Override

@@ -2,10 +2,12 @@ package com.vijayganduri.nutricheck.model;
 
 import java.io.Serializable;
 
+import io.realm.RealmObject;
+
 /**
  * Created by vganduri on 8/2/2015.
  */
-public class Portion  implements Serializable {
+public class Portion  extends RealmObject implements Serializable {
 
     private String name;
     private Nutrients nutrients;
@@ -26,11 +28,4 @@ public class Portion  implements Serializable {
         this.nutrients = nutrients;
     }
 
-    @Override
-    public String toString() {
-        return "Portion{" +
-                "name='" + name + '\'' +
-                ", nutrients=" + nutrients +
-                '}';
-    }
 }
