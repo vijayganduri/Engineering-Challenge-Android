@@ -16,6 +16,7 @@ public class BasicDao{
 
     public String updated = "Updated";
     public String fetched = "Fetched";
+    public String deleted = "Deleted";
 
     protected void printMetricLogs(String action, long timeinmillis, int rowsAffected){
         Log.d(TAG, String.format("%s %d row(s) in %d millisecs", action, rowsAffected, timeinmillis));

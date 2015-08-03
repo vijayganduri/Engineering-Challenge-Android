@@ -1,11 +1,8 @@
 package com.vijayganduri.nutricheck.model;
 
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;

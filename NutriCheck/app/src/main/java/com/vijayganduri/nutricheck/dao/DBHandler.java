@@ -2,6 +2,8 @@ package com.vijayganduri.nutricheck.dao;
 
 import android.content.Context;
 
+import com.vijayganduri.nutricheck.model.Favorite;
+
 import io.realm.Realm;
 
 /**
@@ -14,6 +16,7 @@ public class DBHandler {
     private Realm realm;
     private FoodDao foodDao;
     private RecentDao recentDao;
+    private FavoriteDao favoriteDao;
 
     public static DBHandler getInstance(Context context) {
         if(ourInstance == null){
@@ -26,6 +29,7 @@ public class DBHandler {
         realm = Realm.getInstance(context);
         foodDao = new FoodDao(realm);
         recentDao = new RecentDao(realm);
+        favoriteDao = new FavoriteDao(realm);
     }
 
     public FoodDao getFoodDao(){
@@ -34,6 +38,10 @@ public class DBHandler {
 
     public RecentDao getRecentDao(){
         return recentDao;
+    }
+
+    public FavoriteDao getFavoriteDao(){
+        return favoriteDao;
     }
 
 }

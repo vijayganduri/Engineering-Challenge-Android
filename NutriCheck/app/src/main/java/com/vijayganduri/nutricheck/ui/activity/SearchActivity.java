@@ -77,13 +77,12 @@ public class SearchActivity extends AppCompatActivity implements FoodListAdapter
     }
 
     private void performQuery(String query){
-        Log.w(TAG, "Searched for " + query);
 
         RestHandler.getInstance().getFoodByQuery(query, new Callback<List<Food>>() {
             @Override
-            public void success(List<Food> foods, Response response) {
-                Log.w(TAG, "response"+response);
-                mAdapter.setItems(foods);
+            public void success(List<Food> items, Response response) {
+                mAdapter.setItems(items);
+               // DBHandler.getInstance(SearchActivity.this).getFoodDao().addOrUpdateRecentItems(items);
             }
 
             @Override

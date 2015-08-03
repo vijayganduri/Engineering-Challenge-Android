@@ -14,9 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vijayganduri.nutricheck.R;
+import com.vijayganduri.nutricheck.dao.DBHandler;
+import com.vijayganduri.nutricheck.dao.FavoriteDao;
+import com.vijayganduri.nutricheck.model.Favorite;
 import com.vijayganduri.nutricheck.model.Food;
 import com.vijayganduri.nutricheck.model.Important;
 import com.vijayganduri.nutricheck.model.Portion;
+
+import java.util.Date;
 
 public class FoodDetailActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
@@ -40,6 +45,8 @@ public class FoodDetailActivity extends AppCompatActivity implements AdapterView
     private TextView sugar;
     private TextView mono;
     private TextView cholesterol;
+
+    private boolean favorite;
 
     private Spinner portionSpinner;
 
@@ -146,6 +153,18 @@ public class FoodDetailActivity extends AppCompatActivity implements AdapterView
         if(important.getCholesterol()!=null) {
             cholesterol.setText(String.format("%.2f %s", important.getCholesterol().getValue(), important.getCholesterol().getUnit()));
         }
+
+        //FavoriteDao favoriteDao = DBHandler.getInstance(this).getFavoriteDao();
+       // syncFavState(favoriteDao.isFoodFavoriteById(item.get_id()));
+    }
+
+    private void syncFavState(boolean favorite){
+        this.favorite = favorite;
+        if(favorite){
+            favButton.setImageResource(R.mipmap.ic_star);
+        }else{
+            favButton.setImageResource(R.mipmap.ic_star_border);
+        }
     }
 
     @Override
@@ -179,7 +198,13 @@ public class FoodDetailActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.favoriteButton){
-
+ /*           if(!favorite) {
+                Favorite favorite = new Favorite(item.get_id(), new Date().getTime());
+                DBHandler.getInstance(this).getFavoriteDao().addOrUpdateFavoriteItem(favorite);
+            }else{
+                DBHandler.getInstance(this).getFavoriteDao().removeFavoriteItem(item.get_id());
+            }
+            syncFavState(!favorite);*/
         }
     }
 }
