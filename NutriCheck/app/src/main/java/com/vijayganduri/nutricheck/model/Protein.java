@@ -11,6 +11,15 @@ public class Protein extends RealmObject implements Serializable {
     private String unit;
     private float value;
 
+    public Protein() {
+
+    }
+
+    public Protein(String unit, float value) {
+        this.unit = unit;
+        this.value = value;
+    }
+
     public String getUnit() {
         return unit;
     }

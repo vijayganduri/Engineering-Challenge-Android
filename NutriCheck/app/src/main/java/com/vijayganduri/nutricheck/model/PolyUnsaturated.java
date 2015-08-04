@@ -11,6 +11,15 @@ public class PolyUnsaturated extends RealmObject implements Serializable {
     private String unit;
     private float value;
 
+    public PolyUnsaturated() {
+
+    }
+
+    public PolyUnsaturated(String unit, float value) {
+        this.unit = unit;
+        this.value = value;
+    }
+
     public String getUnit() {
         return unit;
     }

@@ -3,7 +3,8 @@
     
     <color name="colorPrimaryDark">#009bae</color><!-- Statusbar -->
     <color name="colorPrimary">#00abc0</color> <!-- actionbar -->
-    <color name="colorAccent">#ff5621</color> <!-- widgets, fab-->
+    <color name="colorAccent">#ff5621</color>
+    <color name="colorControlNormal">#cccccc</color>
 
     <color name="textColorPrimary">#212121</color>
     <color name="textColorSecondary">#727272</color>
@@ -17,7 +18,7 @@
 
     <color name="foodDetailDivider">#88cccccc</color>
 
-    <color name="colorControlNormal">#cccccc</color>
+    <color name="text_field_content">#333333</color>
 
 
     <color name="appBg">#ffffff</color>

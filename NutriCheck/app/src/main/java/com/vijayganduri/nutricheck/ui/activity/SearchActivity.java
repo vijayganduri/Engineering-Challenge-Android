@@ -39,6 +39,8 @@ public class SearchActivity extends AppCompatActivity implements FoodListAdapter
     public static final String INTENT_FOOD_SEARCH_QUERY = "food.search.query";
     private static final String TAG = SearchActivity.class.getSimpleName();
 
+    private String query;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,18 +73,20 @@ public class SearchActivity extends AppCompatActivity implements FoodListAdapter
         }else if (getIntent().getExtras()!=null) {
             String query = getIntent().getExtras().getString(INTENT_FOOD_SEARCH_QUERY);
             if(query!=null) {
+                this.query = query;
                 performQuery(query);
             }
         }
     }
 
     private void performQuery(String query){
+        Log.w(TAG, "performQuery");
 
         RestHandler.getInstance().getFoodByQuery(query, new Callback<List<Food>>() {
             @Override
             public void success(List<Food> items, Response response) {
                 mAdapter.setItems(items);
-                DBHandler.getInstance(SearchActivity.this).getFoodDao().addOrUpdateRecentItems(items);
+                DBHandler.getInstance(SearchActivity.this).getFoodDao().addOrUpdateFoodItems(items);
             }
 
             @Override
@@ -100,10 +104,12 @@ public class SearchActivity extends AppCompatActivity implements FoodListAdapter
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_search, menu);
-
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_auto_search));
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        if(query!=null){
+            searchView.setQuery(query, false);// only needed when transferring query to this screen
+        }
         searchView.setIconifiedByDefault(false);
         return true;
     }

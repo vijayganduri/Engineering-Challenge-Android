@@ -16,15 +16,34 @@
 
     <string name="action_example">Example action</string>
 
+    <string name="action_add">Add</string>
     <string name="action_settings">Settings</string>
     <string name="auto_complete_title">Search</string>
     <string name="auto_complete_hint">Search for food</string>
     <string name="title_activity_search">SearchActivity</string>
 
-    <string name="nutrition_fat">FAT</string>
-    <string name="nutrition_carbs">CARBS</string>
-    <string name="nutrition_protein">PROTEIN</string>
-    <string name="nutrition_calories">CALORIES</string>
+    <string name="food_name">Food Name</string>
+    <string name="portion_size">Portion size</string>
+
+    <string name="nutrition_fat_in_mg">Fat (mg)</string>
+    <string name="nutrition_carbs_in_mg">Carbs (mg)</string>
+    <string name="nutrition_protein_in_mg">Protein (mg)</string>
+    <string name="nutrition_calories_in_kcal">Calories (kcal)</string>
+
+    <string name="nutrition_fibre_in_mg">Dietary Fibre (mg)</string>
+    <string name="nutrition_trans_in_mg">Trans Fat (mg)</string>
+    <string name="nutrition_saturated_in_mg">Saturated (mg)</string>
+    <string name="nutrition_sodium_in_mg">Sodium (mg)</string>
+    <string name="nutrition_potassium_in_mg">Potassium (mg)</string>
+    <string name="nutrition_poly_in_mg">Poly Unsaturated (mg)</string>
+    <string name="nutrition_mono_in_mg">Mono Unsaturated (mg)</string>
+    <string name="nutrition_sugar_in_mg">Sugar (mg)</string>
+    <string name="nutrition_cholesterol_in_mg">cholesterol (mg)</string>
+
+    <string name="nutrition_fat">Fat</string>
+    <string name="nutrition_carbs">Carbs</string>
+    <string name="nutrition_protein">Protein</string>
+    <string name="nutrition_calories">Calories</string>
 
     <string name="nutrition_fibre">Dietary Fibre</string>
     <string name="nutrition_trans">Trans Fat</string>
@@ -38,4 +57,5 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_food_detail">FoodDetailActivity</string>
+    <string name="title_activity_add_food">Add Food</string>
 </resources>

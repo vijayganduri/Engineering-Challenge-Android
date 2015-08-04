@@ -1,7 +1,9 @@
 package com.vijayganduri.nutricheck.ui.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,16 +16,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vijayganduri.nutricheck.R;
+import com.vijayganduri.nutricheck.ui.activity.AddFoodActivity;
 import com.vijayganduri.nutricheck.ui.activity.HomeActivity;
+import com.vijayganduri.nutricheck.ui.activity.SearchActivity;
 
-public class NutritionFragment extends Fragment {
+public class NutritionFragment extends Fragment implements View.OnClickListener{
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     private ViewPager pager;
     private TabLayout slidingTabsLayout;
+    private TabsPagerAdapter tabsPagerAdapter;
+    private FloatingActionButton addFoodBtn;
 
     private static final String TAG = NutritionFragment.class.getSimpleName();
-    private TabsPagerAdapter tabsPagerAdapter;
 
     public static NutritionFragment newInstance(int sectionNumber) {
         NutritionFragment fragment = new NutritionFragment();
@@ -47,6 +52,7 @@ public class NutritionFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         pager = (ViewPager)view.findViewById(R.id.pager);
         slidingTabsLayout = (TabLayout)view.findViewById(R.id.sliding_tabs);
+        addFoodBtn = (FloatingActionButton)view.findViewById(R.id.add_food);
         tabsPagerAdapter = new TabsPagerAdapter(getChildFragmentManager());
 
         pager.setAdapter(tabsPagerAdapter);
@@ -62,6 +68,8 @@ public class NutritionFragment extends Fragment {
                 }
             });
         }
+
+        addFoodBtn.setOnClickListener(this);
     }
 
     @Override
@@ -76,6 +84,14 @@ public class NutritionFragment extends Fragment {
         Log.w(TAG, "onAttach");
         ((HomeActivity) activity).onSectionAttached(
                 getArguments().getInt(ARG_SECTION_NUMBER));
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==addFoodBtn.getId()){
+            Intent intent = new Intent(getActivity(), AddFoodActivity.class);
+            startActivity(intent);
+        }
     }
 
     public class TabsPagerAdapter extends FragmentPagerAdapter{

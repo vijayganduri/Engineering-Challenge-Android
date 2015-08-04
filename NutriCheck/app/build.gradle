@@ -34,4 +34,5 @@ dependencies {
     compile 'com.splunk.mint:mint:4.2.1'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'io.realm:realm-android:0.82.0'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
 }
