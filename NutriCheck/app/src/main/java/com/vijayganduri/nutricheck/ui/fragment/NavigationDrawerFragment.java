@@ -21,7 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vijayganduri.nutricheck.R;
@@ -56,6 +58,7 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
 
     private static final String TAG = NavigationDrawerFragment.class.getSimpleName();
+    private TextView mVersionTextView;
 
     public NavigationDrawerFragment() {
     }
@@ -83,8 +86,11 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
+
+        LinearLayout layout = (LinearLayout) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
+        mVersionTextView = (TextView) layout.findViewById(R.id.versionName);
+        mDrawerListView = (ListView) layout.findViewById(R.id.navList);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -93,7 +99,7 @@ public class NavigationDrawerFragment extends Fragment {
         });
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
+                R.layout.nav_drawer_list_item,
                 android.R.id.text1,
                 new String[]{
                         getString(R.string.title_section1),
@@ -102,7 +108,18 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section4)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        return mDrawerListView;
+        mVersionTextView.setText(getVersionName());
+        return layout;
+    }
+
+    private String getVersionName(){
+        try {
+            String versionName = getActivity().getPackageManager()
+                    .getPackageInfo(getActivity().getPackageName(), 0).versionName;
+            return String.format("v%s",versionName);
+        }catch (Exception e){//send dummy if something failed
+            return "v1.0";
+        }
     }
 
     public boolean isDrawerOpen() {

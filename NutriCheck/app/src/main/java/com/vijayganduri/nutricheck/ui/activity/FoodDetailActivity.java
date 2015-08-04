@@ -129,11 +129,19 @@ public class FoodDetailActivity extends AppCompatActivity implements AdapterView
 
     private void setupValues(int position){
         Important important = item.getPortions().get(position).getNutrients().getImportant();
-        fat.setText(String.format("%.2f %s", important.getTotalFats().getValue(), important.getTotalFats().getUnit()));
-        carbs.setText(String.format("%.2f %s", important.getTotalCarbs().getValue(), important.getTotalCarbs().getUnit()));
-        protein.setText(String.format("%.2f %s", important.getProtein().getValue(), important.getProtein().getUnit()));
-        calories.setText(String.format("%.2f %s", important.getCalories().getValue(), important.getCalories().getUnit()));
 
+        if(important.getTotalFats()!=null) {
+            fat.setText(String.format("%.2f %s", important.getTotalFats().getValue(), important.getTotalFats().getUnit()));
+        }
+        if(important.getTotalCarbs()!=null) {
+            carbs.setText(String.format("%.2f %s", important.getTotalCarbs().getValue(), important.getTotalCarbs().getUnit()));
+        }
+        if(important.getProtein()!=null) {
+            protein.setText(String.format("%.2f %s", important.getProtein().getValue(), important.getProtein().getUnit()));
+        }
+        if(important.getCalories()!=null) {
+            calories.setText(String.format("%.2f %s", important.getCalories().getValue(), important.getCalories().getUnit()));
+        }
         if(important.getDietaryFibre()!=null) {
             fibre.setText(String.format("%.2f %s", important.getDietaryFibre().getValue(), important.getDietaryFibre().getUnit()));
         }

@@ -74,12 +74,16 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
         for(Portion portion:portions){
             String name = portion.getName();
             if(name!=null && name.contains("100 g")){
-                calInfoPerPortion = String.format("%s  %s %s",name, portion.getNutrients().getImportant().getCalories().getValue(),
-                        portion.getNutrients().getImportant().getCalories().getUnit());
+                if(portion.getNutrients().getImportant().getCalories()!=null) {
+                    calInfoPerPortion = String.format("%s  %s %s", name, portion.getNutrients().getImportant().getCalories().getValue(),
+                            portion.getNutrients().getImportant().getCalories().getUnit());
+                }
                 break;
             }else{//TODO Refine this logic, no need to tore the calInfo for unncessary rows
-                calInfoPerPortion = String.format("%s  %s %s",name, portion.getNutrients().getImportant().getCalories().getValue(),
-                        portion.getNutrients().getImportant().getCalories().getUnit());
+                if(portion.getNutrients().getImportant().getCalories()!=null) {
+                    calInfoPerPortion = String.format("%s  %s %s", name, portion.getNutrients().getImportant().getCalories().getValue(),
+                            portion.getNutrients().getImportant().getCalories().getUnit());
+                }
             }
         }
         holder.calInfo.setText(calInfoPerPortion);
