@@ -3,6 +3,7 @@ package com.vijayganduri.nutricheck.ui.activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -55,6 +56,7 @@ public class AddFoodActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_food);
+        setupToolbar();
         title = (MaterialEditText)findViewById(R.id.foodName);
         portionSize = (MaterialEditText)findViewById(R.id.portion);
         fat = (MaterialEditText)findViewById(R.id.fat);
@@ -70,9 +72,14 @@ public class AddFoodActivity extends AppCompatActivity {
         sugar = (MaterialEditText)findViewById(R.id.sugar);
         mono = (MaterialEditText)findViewById(R.id.mono);
         cholesterol = (MaterialEditText)findViewById(R.id.cholesterol);
-
     }
-
+    
+    private void setupToolbar(){
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    
     private void addFoodDetailsToDb(){
 
         if(title.getText().toString().length()<=2){

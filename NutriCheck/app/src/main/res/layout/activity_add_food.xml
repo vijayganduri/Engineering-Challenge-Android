@@ -1,107 +1,130 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.vijayganduri.nutricheck.ui.activity.AddFoodActivity">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" >
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="25dp"
-        android:orientation="vertical">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/foodName"
-            android:hint="@string/food_name"
-            style="@style/FloatingEditTextStyle"
-            app:met_minCharacters="3"
-            android:inputType="text"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="25dp"
+            android:orientation="vertical">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/portion"
-            android:hint="@string/portion_size"
-            style="@style/FloatingEditTextStyle"
-            app:met_minCharacters="1"
-            android:inputType="text"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/foodName"
+                android:hint="@string/food_name"
+                style="@style/FloatingEditTextStyle"
+                app:met_minCharacters="3"
+                android:inputType="text"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/calories"
-            android:hint="@string/nutrition_calories_in_kcal"
-            app:met_floatingLabelText="@string/nutrition_calories"
-            style="@style/FloatingEditTextStyle"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/portion"
+                android:hint="@string/portion_size"
+                style="@style/FloatingEditTextStyle"
+                app:met_minCharacters="1"
+                android:inputType="text"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/protein"
-            android:hint="@string/nutrition_protein_in_mg"
-            app:met_floatingLabelText="@string/nutrition_protein"
-            style="@style/FloatingEditTextStyle"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/calories"
+                android:hint="@string/nutrition_calories_in_kcal"
+                app:met_floatingLabelText="@string/nutrition_calories"
+                style="@style/FloatingEditTextStyle"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/carbs"
-            android:hint="@string/nutrition_carbs_in_mg"
-            app:met_floatingLabelText="@string/nutrition_carbs"
-            style="@style/FloatingEditTextStyle"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/protein"
+                android:hint="@string/nutrition_protein_in_mg"
+                app:met_floatingLabelText="@string/nutrition_protein"
+                style="@style/FloatingEditTextStyle"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/fat"
-            android:hint="@string/nutrition_fat_in_mg"
-            app:met_floatingLabelText="@string/nutrition_fat"
-            style="@style/FloatingEditTextStyle"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/carbs"
+                android:hint="@string/nutrition_carbs_in_mg"
+                app:met_floatingLabelText="@string/nutrition_carbs"
+                style="@style/FloatingEditTextStyle"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/fibre"
-            android:hint="@string/nutrition_fibre_in_mg"
-            app:met_floatingLabelText="@string/nutrition_fibre"
-            style="@style/FloatingEditTextStyle"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/fat"
+                android:hint="@string/nutrition_fat_in_mg"
+                app:met_floatingLabelText="@string/nutrition_fat"
+                style="@style/FloatingEditTextStyle"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/trans"
-            android:hint="@string/nutrition_trans_in_mg"
-            app:met_floatingLabelText="@string/nutrition_trans"
-            style="@style/FloatingEditTextStyle"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/fibre"
+                android:hint="@string/nutrition_fibre_in_mg"
+                app:met_floatingLabelText="@string/nutrition_fibre"
+                style="@style/FloatingEditTextStyle"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/saturated"
-            android:hint="@string/nutrition_saturated_in_mg"
-            app:met_floatingLabelText="@string/nutrition_saturated"
-            style="@style/FloatingEditTextStyle"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/trans"
+                android:hint="@string/nutrition_trans_in_mg"
+                app:met_floatingLabelText="@string/nutrition_trans"
+                style="@style/FloatingEditTextStyle"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/sodium"
-            android:hint="@string/nutrition_sodium_in_mg"
-            app:met_floatingLabelText="@string/nutrition_sodium"
-            style="@style/FloatingEditTextStyle"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/saturated"
+                android:hint="@string/nutrition_saturated_in_mg"
+                app:met_floatingLabelText="@string/nutrition_saturated"
+                style="@style/FloatingEditTextStyle"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/potassium"
-            android:hint="@string/nutrition_potassium_in_mg"
-            app:met_floatingLabelText="@string/nutrition_potassium"
-            style="@style/FloatingEditTextStyle"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/sodium"
+                android:hint="@string/nutrition_sodium_in_mg"
+                app:met_floatingLabelText="@string/nutrition_sodium"
+                style="@style/FloatingEditTextStyle"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/poly"
-            android:hint="@string/nutrition_poly_in_mg"
-            app:met_floatingLabelText="@string/nutrition_poly"
-            style="@style/FloatingEditTextStyle"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/potassium"
+                android:hint="@string/nutrition_potassium_in_mg"
+                app:met_floatingLabelText="@string/nutrition_potassium"
+                style="@style/FloatingEditTextStyle"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/sugar"
-            android:hint="@string/nutrition_sugar_in_mg"
-            app:met_floatingLabelText="@string/nutrition_sugar"
-            style="@style/FloatingEditTextStyle"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/poly"
+                android:hint="@string/nutrition_poly_in_mg"
+                app:met_floatingLabelText="@string/nutrition_poly"
+                style="@style/FloatingEditTextStyle"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/mono"
-            android:hint="@string/nutrition_mono_in_mg"
-            app:met_floatingLabelText="@string/nutrition_mono"
-            style="@style/FloatingEditTextStyle"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/sugar"
+                android:hint="@string/nutrition_sugar_in_mg"
+                app:met_floatingLabelText="@string/nutrition_sugar"
+                style="@style/FloatingEditTextStyle"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/cholesterol"
-            android:hint="@string/nutrition_cholesterol_in_mg"
-            app:met_floatingLabelText="@string/nutrition_cholesterol"
-            style="@style/FloatingEditTextStyle"/>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/mono"
+                android:hint="@string/nutrition_mono_in_mg"
+                app:met_floatingLabelText="@string/nutrition_mono"
+                style="@style/FloatingEditTextStyle"/>
 
-    </LinearLayout>
-</ScrollView>
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/cholesterol"
+                android:hint="@string/nutrition_cholesterol_in_mg"
+                app:met_floatingLabelText="@string/nutrition_cholesterol"
+                style="@style/FloatingEditTextStyle"/>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

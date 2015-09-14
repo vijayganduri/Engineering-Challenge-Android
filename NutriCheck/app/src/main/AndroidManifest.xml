@@ -41,13 +41,15 @@
         <activity
             android:name=".ui.activity.FoodDetailActivity"
             android:label="@string/title_activity_food_detail"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomAppTheme">
         </activity>
         <activity
             android:name=".ui.activity.AddFoodActivity"
             android:label="@string/title_activity_add_food"
             android:launchMode="singleTop"
-            android:parentActivityName=".ui.activity.HomeActivity" >
+            android:parentActivityName=".ui.activity.HomeActivity"
+            android:theme="@style/CustomAppTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.vijayganduri.nutricheck.ui.activity.HomeActivity" />
