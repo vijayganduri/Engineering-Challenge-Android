@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +31,6 @@ public class FoodDetailActivity extends AppCompatActivity implements AdapterView
     private String itemId;
     private Food item;
 
-    private TextView title;
     private TextView source;
     private TextView protein;
     private TextView fat;
@@ -56,8 +56,8 @@ public class FoodDetailActivity extends AppCompatActivity implements AdapterView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupActionbar();
         setContentView(R.layout.activity_food_detail);
+        setupToolbar();
 
         if(getIntent()!=null && getIntent().getExtras()!=null){
             itemId = getIntent().getExtras().getString(INTENT_FOOD_INFO, null);
@@ -71,7 +71,6 @@ public class FoodDetailActivity extends AppCompatActivity implements AdapterView
             return;
         }
 
-        title = (TextView)findViewById(R.id.title);
         source = (TextView)findViewById(R.id.source);
         fat = (TextView)findViewById(R.id.fat);
         protein = (TextView)findViewById(R.id.protien);
@@ -87,32 +86,26 @@ public class FoodDetailActivity extends AppCompatActivity implements AdapterView
         sugar = (TextView)findViewById(R.id.sugar);
         mono = (TextView)findViewById(R.id.mono);
         cholesterol = (TextView)findViewById(R.id.cholesterol);
-
         portionSpinner = (Spinner)findViewById(R.id.portionsSize);
-
         favButton = (FloatingActionButton)findViewById(R.id.favoriteButton);
 
         setupInfo();
     }
 
-    private void setupActionbar(){
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setElevation(0);
-        actionbar.setDisplayShowTitleEnabled(false);
-        actionbar.setDisplayShowHomeEnabled(true);
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeButtonEnabled(true);
+    private void setupToolbar(){
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void setupInfo(){
-
         item = DBHandler.getInstance(this).getFoodDao().getFoodItemMatchingId(itemId);
         if(item==null){
             Toast.makeText(this, "Could not find any item", Toast.LENGTH_LONG).show();
             finish();
             return;
         }
-        title.setText(item.getName());
+        getSupportActionBar().setTitle(item.getName());
         source.setText(String.format("Source : %s", item.getSource()));
 
         favButton.setOnClickListener(this);
